@@ -1,66 +1,13 @@
-# red-pocket
+Website flow:
 
-Write validators in the `validators` folder, and supporting functions in the `lib` folder using `.ak` as a file extension.
-
-```aiken
-validator my_first_validator {
-  spend(_datum: Option<Data>, _redeemer: Data, _output_reference: Data, _context: Data) {
-    True
-  }
-}
-```
-
-## Building
-
-```sh
-aiken build
-```
-
-## Configuring
-
-**aiken.toml**
-```toml
-[config.default]
-network_id = 41
-```
-
-Or, alternatively, write conditional environment modules under `env`.
-
-## Testing
-
-You can write tests in any module using the `test` keyword. For example:
-
-```aiken
-use config
-
-test foo() {
-  config.network_id + 1 == 42
-}
-```
-
-To run all tests, simply do:
-
-```sh
-aiken check
-```
-
-To run only tests matching the string `foo`, do:
-
-```sh
-aiken check -m foo
-```
-
-## Documentation
-
-If you're writing a library, you might want to generate an HTML documentation for it.
-
-Use:
-
-```sh
-aiken docs
-```
-
-## Resources
-
-Find more on the [Aiken's user manual](https://aiken-lang.org).
-# red_pocket_cardano
+- User locks in asset(s) that they want to give in smart contract.
+- User can choose to either mint NFT in their wallet, or have the minted NFT sent to an address of their choice.
+    - Preferably will also integrate ADA handles (TBC)
+- Assets are sent to smart contract, and NFT is minted.
+    - Asset will sit on UTxO with script address, with a datum indicating which asset can unlock it.
+    - This will depend on a system of counter, where an oracle keeps track of how many red pockets have been minted, and assigns a unique counter to each red pocket.
+- User or address of their choice receive Red Pocket NFT with art.
+    - Although the Red Pocket art will look identical for everyone, they will each have a unique PolicyId.
+    - Hope to have a special art work if SNEK is minted (TBC)
+- Oracle will update each time a new red pocket is minted
+- Apart from counter, there is another variable in oracle and script datum that indicates the year of the red pocket (ie Snake, Horse etc...)
