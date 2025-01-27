@@ -1,10 +1,15 @@
 use cardano/address.{Address}
+use cardano/assets.{PolicyId}
+
+type Counter =
+  Int
 
 pub type OracleDatum {
-  oracle_counter: Int,
+  oracle_counter: Counter,
   lovelace_price: Int,
   fee_address: Address,
   script_address: Address,
+  red_pocket_policy: PolicyId,
   oracle_year_zodiac: ByteArray,
 }
 
@@ -20,6 +25,6 @@ pub type RedPocketRedeemer {
 }
 
 pub type RedPocketDatum {
-  datum_counter: Int,
+  datum_counter: Counter,
   datum_year_zodiac: ByteArray,
 }
